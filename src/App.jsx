@@ -1,23 +1,22 @@
 import React from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import HomeCards from "./components/HomeCards";
-import JobListings from "./components/JobListings";
-import ViewAllJobs from "./components/ViewAllJobs";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import MainLayout from "./layouts/MainLayout";
+import Jobs from "./pages/Jobs";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   return (
     <>
-      <Navbar />
-      <Hero
-        title="Become a React Dev"
-        subtitle="Find the React job that fits your skills and needs"
-      />
-      <HomeCards />
-      <>
-        <JobListings />
-        <ViewAllJobs />
-      </>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </Router>
     </>
   );
 };
